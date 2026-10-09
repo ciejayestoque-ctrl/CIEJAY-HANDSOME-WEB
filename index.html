@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GROUP7 portfolio</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #0b0b0b;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* ================= NAVIGATION ================= */
+
+        .navbar {
+            position: fixed;
+            top: 25px;
+            left: 40px;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            display: inline-block;
+            margin-right: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            padding-bottom: 5px;
+            position: relative;
+            transition: 0.3s ease;
+        }
+
+        /* Smooth underline animation */
+
+        .navbar a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            left: 0;
+            bottom: 0;
+            background: #00ffff;
+            transition: width 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #00ffff;
+        }
+
+        .navbar a:hover::after {
+            width: 100%;
+        }
+
+        /* ================= PAGE ================= */
+
+        .page {
+            min-height: 100vh;
+            padding: 80px 7%;
+            display: none;
+            align-items: center;
+            position: relative;
+            animation: pageIn 0.7s ease;
+        }
+
+        .page.active {
+            display: flex;
+        }
+
+        @keyframes pageIn {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ================= PROFILE ================= */
+
+        .profile-area {
+            width: 42%;
+            padding-left: 20px;
+        }
+
+        .profile-img {
+            width: 190px;
+            height: 190px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            display: block;
+            margin-bottom: 20px;
+            transition: 0.5s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.06);
+            box-shadow: 0 0 35px rgba(0, 255, 255, 0.5);
+        }
+
+        .name {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .greeting {
+            font-size: 19px;
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
+        /* ================= RIGHT CONTENT ================= */
+
+        .content {
+            width: 58%;
+            padding-left: 40px;
+        }
+
+        .content-box {
+            display: none;
+            animation: contentIn 0.5s ease;
+        }
+
+        .content-box.active {
+            display: block;
+        }
+
+        @keyframes contentIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: #00ffff;
+        }
+
+        .content p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #ddd;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .skill {
+            padding: 12px 20px;
+            border: 1px solid #00ffff;
+            border-radius: 25px;
+            transition: 0.3s ease;
+        }
+
+        .skill:hover {
+            background: #00ffff;
+            color: black;
+            transform: translateY(-5px);
+        }
+
+        /* ================= NEXT BUTTON ================= */
+
+        .next-btn {
+            position: fixed;
+            right: 40px;
+            bottom: 30px;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 30px;
+            background: white;
+            color: black;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease;
+            z-index: 1000;
+        }
+
+        .next-btn:hover {
+            background: #00ffff;
+            transform: translateX(6px);
+            box-shadow: 0 0 25px rgba(0,255,255,0.5);
+        }
+
+        /* ================= PAGE COLORS ================= */
+
+        #page1 {
+            background: linear-gradient(120deg, #07111f, #102a43);
+        }
+
+        #page2 {
+            background: linear-gradient(120deg, #160b24, #32134f);
+        }
+
+        #page3 {
+            background: linear-gradient(120deg, #071d1d, #0b403d);
+        }
+
+        #page4 {
+            background: linear-gradient(120deg, #211207, #54290d);
+        }
+
+        #page5 {
+            background: linear-gradient(120deg, #21091a, #551538);
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                left: 20px;
+                top: 15px;
+            }
+
+            .navbar a {
+                font-size: 12px;
+                margin-right: 10px;
+            }
+
+            .page {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 100px 30px;
+            }
+
+            .profile-area,
+            .content {
+                width: 100%;
+                padding: 0;
+            }
+
+            .profile-img {
+                width: 130px;
+                height: 130px;
+            }
+
+            .name {
+                font-size: 32px;
+            }
+
+            .content {
+                margin-top: 40px;
+            }
+
+            .content h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         MEMBER 1
+    ====================================================== -->
+
+    <section class="page active" id="page1">
+
+        <!-- NAVIGATION -->
+        <div class="navbar">
+            <a href="#" onclick="showContent(1, 'about'); return false;">About Me</a>
+            <a href="#" onclick="showContent(1, 'skills'); return false;">Skills</a>
+            <a href="#" onclick="showContent(1, 'achievement'); return false;">Achievement</a>
+            <a href="#" onclick="showContent(1, 'contact'); return false;">Contact</a>
+        </div>
+
+        <!-- PROFILE -->
+        <div class="profile-area">
+
+            <!-- CHANGE THIS IMAGE -->
+            <img src="c:\Users\cieja\Downloads\822535542_1403104277990918_6817921141359889071_n.jpg" class="profile-img" alt="Member 2">
+            <!-- CHANGE NAME -->
+            <h1 class="name">CEIJAY ESTOQUE</h1>
+
+            <p class="greeting">
+                Hello, I'm Ceijay. Nice to meet you!
+            </p>
+
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <div id="page1-about" class="content-box active">
+                <h2>About Me</h2>
+                <p>
+                    I'm a college student interested in technology,
+                    programming, web development, and video editing.
+                    I enjoy learning new skills and creating projects.
+                </p>
+            </div>
+
+            <div id="page1-skills" class="content-box">
+                <h2>Skills</h2>
+
+                <div class="skills">
+                    <div class="skill">Java</div>
+                    <div class="skill">HTML</div>
+                    <div class="skill">CSS</div>
+                    <div class="skill">JavaScript</div>
+                    <div class="skill">Video Editing</div>
+                    <div class="skill">Coding</div>
+                </div>
+            </div>
+
+            <div id="page1-achievement" class="content-box">
+                <h2>Achievement</h2>
+                <p>
+                    - TESTDA NC2 Passer - computer system servicing<br><br>
+                    - Senior high school graduate with NC2 passer
+                </p>
+            </div>
+
+            <div id="page1-contact" class="content-box">
+                <h2>Contact</h2>
+                <p>
+                    Email: ciejayestoque@gmail.com<br><br>
+                    Facebook: Ceijay Estoque<br><br>
+                    Contact No.: 09772174655
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MEMBER 2
+    ====================================================== -->
+
+    <section class="page" id="page2">
+
+        <div class="navbar">
+            <a href="#" onclick="showContent(2, 'about'); return false;">About Me</a>
+            <a href="#" onclick="showContent(2, 'skills'); return false;">Skills</a>
+            <a href="#" onclick="showContent(2, 'achievement'); return false;">Achievement</a>
+            <a href="#" onclick="showContent(2, 'contact'); return false;">Contact</a>
+        </div>
+
+        <div class="profile-area">
+
+            <!-- CHANGE THIS IMAGE -->
+            <img src="c:\Users\cieja\Downloads\f734021a-e94f-4061-84fd-6b751bde51ac.jpg" class="profile-img" alt="Member 2">
+
+            <!-- CHANGE NAME -->
+            <h1 class="name">JOMAR LORENZO</h1>
+
+            <p class="greeting">
+                Hello, Jomar Lorenzo. Nice to meet you!
+            </p>
+
+        </div>
+
+        <div class="content">
+
+            <div id="page2-about" class="content-box active">
+                <h2>About Me</h2>
+                <p>
+                    I am information Technology student who is interested in web
+                    development, technology, anf programming. i enjoy learning and creating
+                    new things to improve mt skills.
+                </p>
+            </div>
+
+            <div id="page2-skills" class="content-box">
+                <h2>Skills</h2>
+
+                <div class="skills">
+                    <div class="skill">HTML</div>
+                    <div class="skill">JAVA</div>
+                    <div class="skill">CSS</div>
+                    
+                </div>
+            </div>
+
+            <div id="page2-achievement" class="content-box">
+                <h2>Achievement</h2>
+                <p>
+                    NC ll passer - Computer System Servicing
+                </p>
+            </div>
+
+            <div id="page2-contact" class="content-box">
+                <h2>Contact</h2>
+                <p>
+                    Email: Jomarlorenzo520@gmail.com<br><br>
+                    Facebook: Jomar Lorenzo
+                    Contact No.:09813172077
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MEMBER 3
+    ====================================================== -->
+
+    <section class="page" id="page3">
+
+        <div class="navbar">
+            <a href="#" onclick="showContent(3, 'about'); return false;">About Me</a>
+            <a href="#" onclick="showContent(3, 'skills'); return false;">Skills</a>
+            <a href="#" onclick="showContent(3, 'achievement'); return false;">Achievement</a>
+            <a href="#" onclick="showContent(3, 'contact'); return false;">Contact</a>
+        </div>
+
+        <div class="profile-area">
+
+            <!-- CHANGE THIS IMAGE -->
+            <img src="c:\Users\cieja\Downloads\818491045_1097129539681945_3483094846792659813_n.jpg" class="profile-img" alt="Member 3">
+
+            <!-- CHANGE NAME -->
+            <h1 class="name">SHYLA TORILLA</h1>
+
+            <p class="greeting">
+                Hello, I'm SHYLA TORILLA. Nice to meet you!
+            </p>
+
+        </div>
+
+        <div class="content">
+
+            <div id="page3-about" class="content-box active">
+                <h2>About Me</h2>
+                <p>
+                    I am an Information Technology student from University of Eastern Pangasinan
+                     with a passion for technology and learning. I am interested in computers, programming
+                      and creating new things from me. My goal is to continue developing my skills and become
+                      successful in the IT field. 
+                </p>
+            </div>
+
+            <div id="page3-skills" class="content-box">
+                <h2>Skills</h2>
+
+                <div class="skills">
+                    <div class="skill">Good communication</div>
+                    <div class="skill">Teamwork</div>
+                    <div class="skill">HTML</div>
+                    <div class="skill">JAVA</div>
+                </div>
+            </div>
+
+            <div id="page3-achievement" class="content-box">
+                <h2>Achievement</h2>
+                <p>
+                    - Learned basic C++.<br><br>
+                    - Created a simple Application.<br><br>
+                    - Participated in coding activities.
+                </p>
+            </div>
+
+            <div id="page3-contact" class="content-box">
+                <h2>Contact</h2>
+                <p>
+                    Email: torillashylaann@gmail.com<br><br>
+                    Facebook: Shylla Trlla<br><br>
+                    Contact No.: 09067705535
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MEMBER 4
+    ====================================================== -->
+
+    <section class="page" id="page4">
+
+        <div class="navbar">
+            <a href="#" onclick="showContent(4, 'about'); return false;">About Me</a>
+            <a href="#" onclick="showContent(4, 'skills'); return false;">Skills</a>
+            <a href="#" onclick="showContent(4, 'achievement'); return false;">Achievement</a>
+            <a href="#" onclick="showContent(4, 'contact'); return false;">Contact</a>
+        </div>
+
+        <div class="profile-area">
+
+            <!-- CHANGE THIS IMAGE -->
+            <img src="c:\Users\cieja\Downloads\813320276_1895208234973316_7772686505098175614_n.jpg" class="profile-img" alt="Member 4">
+
+            <!-- CHANGE NAME -->
+            <h1 class="name">RAPHAEL ACOSTA</h1>
+
+            <p class="greeting">
+                Hello, I'm RAPHAEL ACOSTA. Nice to meet you!
+            </p>
+
+        </div>
+
+        <div class="content">
+
+            <div id="page4-about" class="content-box active">
+                <h2>About Me</h2>
+                <p>
+                    I am Information Technology student seeking opportunities to grow, 
+                    practice skills, and build a strong tech career.
+
+                </p>
+            </div>
+
+            <div id="page4-skills" class="content-box">
+                <h2>Skills</h2>
+
+                <div class="skills">
+                    <div class="skill">Teamwork</div>
+                    <div class="skill">Good communication</div>
+                    <div class="skill">HTML</div>
+                </div>
+            </div>
+
+            <div id="page4-achievement" class="content-box">
+                <h2>Achievement</h2>
+                <p>
+                    -TESDA NC II passer  Computer System Servicing
+                     (Senior High School)<br><br>
+                    -Senior High School
+                     Graduate With NC II holder  
+                </p>
+            </div>
+
+            <div id="page4-contact" class="content-box">
+                <h2>Contact</h2>
+                <p>
+                    Email: acostaraphael75@gmail.com<br><br>
+                    Facebook: Raphael Acosta
+                    Contact No.: 09518255142
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MEMBER 5
+    ====================================================== -->
+
+    <section class="page" id="page5">
+
+        <div class="navbar">
+            <a href="#" onclick="showContent(5, 'about'); return false;">About Me</a>
+            <a href="#" onclick="showContent(5, 'skills'); return false;">Skills</a>
+            <a href="#" onclick="showContent(5, 'achievement'); return false;">Achievement</a>
+            <a href="#" onclick="showContent(5, 'contact'); return false;">Contact</a>
+        </div>
+
+        <div class="profile-area">
+
+            <!-- CHANGE THIS IMAGE -->
+            <img src="c:\Users\cieja\Downloads\816606470_1563871188825062_4345336230683705894_n.jpg" class="profile-img" alt="Member 5">
+
+            <!-- CHANGE NAME -->
+            <h1 class="name">PRINCESS VALDEZ</h1>
+
+            <p class="greeting">
+                Hello, I'm Princess Valdez. Nice to meet you!
+            </p>
+
+        </div>
+
+        <div class="content">
+
+            <div id="page5-about" class="content-box active">
+                <h2>About Me</h2>
+                <p>
+                   I am an IT college student from Manaoag, Pangasinan. I am hardworking,
+                    willing to learn, and passionate about technology.
+                </p>
+            </div>
+
+            <div id="page5-skills" class="content-box">
+                <h2>Skills</h2>
+
+                <div class="skills">
+                    <div class="skill">Good communication</div>
+                    <div class="skill">Teamwork</div>
+                    <div class="skill">Microsoft office: Word, Excel, PowerPoint</div>
+                </div>
+            </div>
+
+            <div id="page5-achievement" class="content-box">
+                <h2>Achievement</h2>
+                <p>
+                    Write Member Five's achievements here.
+                </p>
+            </div>
+
+            <div id="page5-contact" class="content-box">
+                <h2>Contact</h2>
+                <p>
+                    Email: valdezprincessmae49@gmail.com<br><br>
+                    Facebook: Prin Cess<br><br>
+                    Contact No.: 09707264704
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= NEXT BUTTON ================= -->
+
+    <button class="next-btn" onclick="nextPage()">
+        Next →
+    </button>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        let currentPage = 1;
+
+        function nextPage() {
+
+            document.getElementById("page" + currentPage)
+                .classList.remove("active");
+
+            currentPage++;
+
+            if (currentPage > 5) {
+                currentPage = 1;
+            }
+
+            document.getElementById("page" + currentPage)
+                .classList.add("active");
+        }
+
+
+        function showContent(page, section) {
+
+            /* Hide every content box of the selected member */
+
+            const boxes = document.querySelectorAll(
+                "#page" + page + " .content-box"
+            );
+
+            boxes.forEach(box => {
+                box.classList.remove("active");
+            });
+
+
+            /* Show the selected section */
+
+            document.getElementById(
+                "page" + page + "-" + section
+            ).classList.add("active");
+        }
+
+    </script>
+
+</body>
+</html>
